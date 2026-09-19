@@ -257,7 +257,7 @@ export const Navbar: React.FC = () => {
 
                 {/* Notification Popover */}
                 {isNotifOpen && (
-                  <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-96 max-w-sm rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-2xl p-3 sm:p-4 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="fixed sm:absolute inset-x-3 sm:inset-x-auto sm:right-0 top-16 sm:top-auto sm:mt-2 w-auto sm:w-80 md:w-96 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] shadow-2xl p-3 sm:p-4 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="flex items-center justify-between pb-2 sm:pb-3 border-b border-[var(--border-subtle)]">
                       <div className="flex items-center gap-2">
                         <span className="font-semibold text-[var(--text-primary)] text-xs sm:text-sm">Notifications</span>
