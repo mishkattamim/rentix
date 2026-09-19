@@ -9,6 +9,7 @@ import {
   Trash2,
   ShieldCheck,
   LogIn,
+  UserPlus,
   Upload,
   Image as ImageIcon
 } from 'lucide-react';
@@ -71,14 +72,14 @@ export const ListItemPage: React.FC = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#09121D] text-[#CBD6D3] flex items-center justify-center p-4">
-        <div className="max-w-md w-full bg-[#0C2B35] border border-[#4A7071] rounded-3xl p-8 shadow-2xl text-center space-y-4">
-          <div className="w-16 h-16 rounded-full bg-[#83B2A8]/20 border-2 border-[#83B2A8] text-[#83B2A8] flex items-center justify-center mx-auto">
+      <div className="min-h-[80vh] bg-[var(--bg-primary)] flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-3xl p-8 text-center space-y-4 shadow-2xl">
+          <div className="w-16 h-16 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] flex items-center justify-center mx-auto text-[var(--accent-primary)]">
             <Sparkles className="w-8 h-8" />
           </div>
 
-          <h2 className="text-2xl font-black text-white">List Your Gear on Rentix</h2>
-          <p className="text-xs text-[#CBD6D3]/70 leading-relaxed">
+          <h2 className="text-2xl font-black text-[var(--text-primary)]">List Your Gear on Rentix</h2>
+          <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
             Please log in or create a verified account to list your camera, drone, or gadgets for rent in Bangladesh.
           </p>
 
@@ -89,17 +90,21 @@ export const ListItemPage: React.FC = () => {
                 setAuthModalTab('login');
                 setIsAuthModalOpen(true);
               }}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#83B2A8] to-[#6da197] text-[#09121D] font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition-all"
+              className="w-full py-3 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-hover)] text-[var(--bg-primary)] font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition-all"
             >
-              <LogIn className="w-4 h-4" /> Sign In to Continue
+              <LogIn className="w-4 h-4" /> Log In
             </button>
 
-            <Link
-              to="/"
-              className="block w-full py-2.5 rounded-xl bg-[#09121D] hover:bg-[#071C23] border border-[#4A7071] text-xs text-[#CBD6D3] hover:text-white transition-colors"
+            <button
+              onClick={() => {
+                setAuthModalReason('Create an account to start renting out your hardware');
+                setAuthModalTab('register');
+                setIsAuthModalOpen(true);
+              }}
+              className="w-full py-3 rounded-xl bg-[var(--bg-surface)] hover:bg-[var(--bg-card)] border border-[var(--border-subtle)] text-xs font-semibold text-[var(--text-primary)] flex items-center justify-center gap-2 transition-colors"
             >
-              ← Back to Rentix Home
-            </Link>
+              <UserPlus className="w-4 h-4" /> Create New Account
+            </button>
           </div>
         </div>
       </div>
@@ -293,7 +298,7 @@ export const ListItemPage: React.FC = () => {
         {/* Wizard Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#83B2A8]/10 text-[#83B2A8] text-xs font-semibold mb-2">
-            <Sparkles className="w-3.5 h-3.5" /> LENDER WIZARD
+            <Sparkles className="w-3.5 h-3.5" /> ISD LENDER WIZARD (BANGLADESH)
           </div>
           <h1 className="text-3xl font-black text-white">List Your Gear for Rent</h1>
           <p className="text-xs text-[#CBD6D3]/70 mt-1 max-w-md mx-auto">
