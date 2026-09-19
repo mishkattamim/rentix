@@ -338,15 +338,18 @@ export const ListItemPage: React.FC = () => {
           ].map((s) => (
             <button
               key={s.num}
+              type="button"
               onClick={() => setStep(s.num)}
               className={`flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-xl transition-all ${step === s.num
-                ? 'bg-[#83B2A8] text-[#09121D] shadow-md'
+                ? 'bg-[#83B2A8] text-[#09121D] shadow-md font-black'
                 : step > s.num
                   ? 'text-[#83B2A8]'
                   : 'text-[#CBD6D3]/50'
                 }`}
             >
-              <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${step === s.num ? 'bg-[#09121D] text-[#83B2A8]' : 'border border-current'
+              <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${step === s.num
+                  ? 'bg-[#09121D] text-[#83B2A8]'
+                  : 'border border-current text-current'
                 }`}>
                 {s.num}
               </span>
@@ -462,7 +465,7 @@ export const ListItemPage: React.FC = () => {
           {step === 2 && (
             <div className="space-y-6 animate-in fade-in duration-200">
               <div>
-                <h3 className="text-lg font-bold text-white mb-2">2. Technical Specifications</h3>
+                <h3 className="text-base sm:text-lg font-bold text-white mb-2">2. Technical Specifications</h3>
                 <p className="text-xs text-[#CBD6D3]/70 mb-4">
                   Add key technical specifications for renters to review.
                 </p>
@@ -472,14 +475,14 @@ export const ListItemPage: React.FC = () => {
                   <div className="space-y-2 mb-3">
                     {specs.map((s, idx) => (
                       <div key={idx} className="flex items-center justify-between bg-[#09121D] p-3 rounded-xl border border-[#4A7071]/40 text-xs">
-                        <div>
+                        <div className="pr-2 truncate">
                           <span className="text-[#CBD6D3]/60">{s.label}: </span>
                           <span className="font-semibold text-white">{s.value}</span>
                         </div>
                         <button
                           type="button"
                           onClick={() => handleRemoveSpec(idx)}
-                          className="text-rose-400 hover:text-rose-300"
+                          className="text-rose-400 hover:text-rose-300 shrink-0 p-1"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -488,26 +491,26 @@ export const ListItemPage: React.FC = () => {
                   </div>
                 )}
 
-                {/* Add Spec Row */}
-                <div className="flex gap-2">
+                {/* Add Spec Row - Stack vertically on mobile, side-by-side on tablet/desktop */}
+                <div className="flex flex-col sm:flex-row gap-2">
                   <input
                     type="text"
                     placeholder="Label (e.g. Lens Mount)"
                     value={newSpecLabel}
                     onChange={(e) => setNewSpecLabel(e.target.value)}
-                    className="flex-1 bg-[#09121D] border border-[#4A7071]/60 rounded-xl p-2.5 text-xs text-white"
+                    className="w-full bg-[#09121D] border border-[#4A7071]/60 rounded-xl p-2.5 text-xs text-white placeholder-[#CBD6D3]/40 focus:border-[#83B2A8] focus:outline-none"
                   />
                   <input
                     type="text"
                     placeholder="Value (e.g. Sony E-Mount)"
                     value={newSpecValue}
                     onChange={(e) => setNewSpecValue(e.target.value)}
-                    className="flex-1 bg-[#09121D] border border-[#4A7071]/60 rounded-xl p-2.5 text-xs text-white"
+                    className="w-full bg-[#09121D] border border-[#4A7071]/60 rounded-xl p-2.5 text-xs text-white placeholder-[#CBD6D3]/40 focus:border-[#83B2A8] focus:outline-none"
                   />
                   <button
                     type="button"
                     onClick={handleAddSpec}
-                    className="px-4 py-2.5 bg-[#83B2A8] text-[#09121D] rounded-xl font-bold text-xs flex items-center gap-1"
+                    className="w-full sm:w-auto px-4 py-2.5 bg-[#83B2A8] hover:bg-[#97c7bd] text-[#09121D] rounded-xl font-bold text-xs flex items-center justify-center gap-1 shrink-0 transition-colors"
                   >
                     <Plus className="w-3.5 h-3.5" /> Add
                   </button>
@@ -516,17 +519,17 @@ export const ListItemPage: React.FC = () => {
 
               {/* Handover Box Accessories */}
               <div className="pt-4 border-t border-[#4A7071]/30">
-                <h4 className="text-sm font-bold text-white mb-2">Included Handover Accessories</h4>
+                <h4 className="text-xs sm:text-sm font-bold text-white mb-2">Included Handover Accessories</h4>
 
                 {includedAccessories.length > 0 && (
                   <div className="space-y-2 mb-3">
                     {includedAccessories.map((acc, idx) => (
                       <div key={idx} className="flex items-center justify-between bg-[#09121D] p-3 rounded-xl border border-[#4A7071]/40 text-xs">
-                        <span className="text-white font-medium">✓ {acc}</span>
+                        <span className="text-white font-medium truncate pr-2">✓ {acc}</span>
                         <button
                           type="button"
                           onClick={() => handleRemoveAccessory(idx)}
-                          className="text-rose-400 hover:text-rose-300"
+                          className="text-rose-400 hover:text-rose-300 shrink-0 p-1"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -535,18 +538,19 @@ export const ListItemPage: React.FC = () => {
                   </div>
                 )}
 
-                <div className="flex gap-2">
+                {/* Add Accessory Row - Responsive Flex */}
+                <div className="flex flex-col sm:flex-row gap-2">
                   <input
                     type="text"
                     placeholder="Add accessory (e.g. 2x CFexpress Type A Cards)"
                     value={newAccessory}
                     onChange={(e) => setNewAccessory(e.target.value)}
-                    className="flex-1 bg-[#09121D] border border-[#4A7071]/60 rounded-xl p-2.5 text-xs text-white"
+                    className="w-full bg-[#09121D] border border-[#4A7071]/60 rounded-xl p-2.5 text-xs text-white placeholder-[#CBD6D3]/40 focus:border-[#83B2A8] focus:outline-none"
                   />
                   <button
                     type="button"
                     onClick={handleAddAccessory}
-                    className="px-4 py-2.5 bg-[#83B2A8] text-[#09121D] rounded-xl font-bold text-xs flex items-center gap-1"
+                    className="w-full sm:w-auto px-4 py-2.5 bg-[#83B2A8] hover:bg-[#97c7bd] text-[#09121D] rounded-xl font-bold text-xs flex items-center justify-center gap-1 shrink-0 transition-colors"
                   >
                     <Plus className="w-3.5 h-3.5" /> Add Item
                   </button>
@@ -605,18 +609,18 @@ export const ListItemPage: React.FC = () => {
               )}
 
               {/* Add Web Image URL */}
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="url"
                   placeholder="Paste web image URL (Unsplash or direct image link)..."
                   value={newImageUrl}
                   onChange={(e) => setNewImageUrl(e.target.value)}
-                  className="flex-1 bg-[#09121D] border border-[#4A7071]/60 rounded-xl p-2.5 text-xs text-white"
+                  className="w-full bg-[#09121D] border border-[#4A7071]/60 rounded-xl p-2.5 text-xs text-white placeholder-[#CBD6D3]/40 focus:border-[#83B2A8] focus:outline-none"
                 />
                 <button
                   type="button"
                   onClick={handleAddImage}
-                  className="px-4 py-2.5 bg-[#83B2A8] text-[#09121D] rounded-xl font-bold text-xs flex items-center gap-1"
+                  className="w-full sm:w-auto px-4 py-2.5 bg-[#83B2A8] hover:bg-[#97c7bd] text-[#09121D] rounded-xl font-bold text-xs flex items-center justify-center gap-1 shrink-0 transition-colors"
                 >
                   <Plus className="w-3.5 h-3.5" /> Add Photo
                 </button>
@@ -701,7 +705,7 @@ export const ListItemPage: React.FC = () => {
                   type="checkbox"
                   checked={isInstantBook}
                   onChange={(e) => setIsInstantBook(e.target.checked)}
-                  className="w-5 h-5 accent-[#83B2A8] cursor-pointer"
+                  className="w-5 h-5 accent-[#83B2A8] cursor-pointer shrink-0 ml-2"
                 />
               </div>
             </div>
@@ -712,15 +716,15 @@ export const ListItemPage: React.FC = () => {
             <div className="space-y-5 animate-in fade-in duration-200">
               <h3 className="text-lg font-bold text-white mb-2">5. Review Your Listing</h3>
 
-              <div className="p-4 rounded-2xl bg-[#09121D] border border-[#4A7071]/50 flex gap-4">
+              <div className="p-4 rounded-2xl bg-[#09121D] border border-[#4A7071]/50 flex flex-col sm:flex-row gap-4">
                 {images && images.length > 0 ? (
                   <img
                     src={images[0]}
                     alt="cover"
-                    className="w-24 h-24 rounded-xl object-cover border border-[#4A7071]"
+                    className="w-full sm:w-24 h-48 sm:h-24 rounded-xl object-cover border border-[#4A7071]"
                   />
                 ) : (
-                  <div className="w-24 h-24 rounded-xl bg-[#0C2B35] border border-[#4A7071] flex items-center justify-center text-[#CBD6D3]/40">
+                  <div className="w-full sm:w-24 h-48 sm:h-24 rounded-xl bg-[#0C2B35] border border-[#4A7071] flex items-center justify-center text-[#CBD6D3]/40">
                     <ImageIcon className="w-8 h-8" />
                   </div>
                 )}
@@ -731,7 +735,7 @@ export const ListItemPage: React.FC = () => {
                   <h4 className="text-base font-bold text-white mt-1">{title || 'Untitled Hardware'}</h4>
                   <p className="text-xs text-[#CBD6D3]/70">{tagline}</p>
 
-                  <div className="flex items-center gap-4 mt-2 pt-2 border-t border-[#4A7071]/30 text-xs">
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-2 pt-2 border-t border-[#4A7071]/30 text-xs">
                     <span className="font-mono font-bold text-white">৳{(dailyRate || 0).toLocaleString()}/day</span>
                     <span className="text-[#83B2A8] font-mono">Deposit: ৳{(securityDeposit || 0).toLocaleString()}</span>
                     <span className="text-[#CBD6D3]/60">Location: {district}</span>
@@ -757,7 +761,7 @@ export const ListItemPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setStep(step - 1)}
-                className="px-5 py-2.5 rounded-xl bg-[#09121D] hover:bg-[#071C23] border border-[#4A7071] text-xs font-semibold text-white flex items-center gap-1.5 transition-colors"
+                className="px-4 sm:px-5 py-2.5 rounded-xl bg-[#09121D] hover:bg-[#071C23] border border-[#4A7071] text-xs font-semibold text-white flex items-center gap-1.5 transition-colors"
               >
                 <ChevronLeft className="w-4 h-4" /> Previous
               </button>
@@ -767,7 +771,7 @@ export const ListItemPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setStep(step + 1)}
-                className="px-6 py-2.5 rounded-xl bg-[#83B2A8] hover:bg-[#97c7bd] text-[#09121D] font-bold text-xs flex items-center gap-1.5 shadow-md transition-transform hover:scale-105"
+                className="px-5 sm:px-6 py-2.5 rounded-xl bg-[#83B2A8] hover:bg-[#97c7bd] text-[#09121D] font-bold text-xs flex items-center gap-1.5 shadow-md transition-transform hover:scale-105"
               >
                 Next Step <ChevronRight className="w-4 h-4" />
               </button>
@@ -775,10 +779,10 @@ export const ListItemPage: React.FC = () => {
               <button
                 type="button"
                 onClick={handlePublish}
-                className="px-8 py-3 rounded-xl bg-gradient-to-r from-[#83B2A8] to-[#6da197] hover:from-[#97c7bd] hover:to-[#83B2A8] text-[#09121D] font-black text-sm shadow-xl shadow-[#83B2A8]/20 flex items-center gap-2 transition-transform hover:scale-105"
+                className="px-6 sm:px-8 py-3 rounded-xl bg-gradient-to-r from-[#83B2A8] to-[#6da197] hover:from-[#97c7bd] hover:to-[#83B2A8] text-[#09121D] font-black text-xs sm:text-sm shadow-xl shadow-[#83B2A8]/20 flex items-center gap-2 transition-transform hover:scale-105"
               >
                 <Sparkles className="w-4 h-4" />
-                Publish Listing to Live Feed
+                Publish Listing
               </button>
             )}
           </div>
