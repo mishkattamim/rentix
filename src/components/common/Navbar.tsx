@@ -194,17 +194,17 @@ export const Navbar: React.FC = () => {
           {/* Right Action Icons & Auth Controls */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
 
-            {/* Explore Feed Link - Icon button on mobile, full label on desktop */}
+            {/* Explore Feed Link - Desktop Only */}
             <Link
               to="/feed"
-              className={`flex items-center gap-1.5 p-2 sm:px-3 sm:py-2 text-xs sm:text-sm font-medium rounded-xl border border-[var(--border-subtle)] transition-colors ${location.pathname === '/feed'
-                ? 'text-[var(--text-primary)] bg-[var(--bg-surface)] border-[var(--border-muted)]'
-                : 'text-[var(--text-secondary)] bg-[var(--bg-surface)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
+              className={`hidden lg:flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${location.pathname === '/feed'
+                ? 'text-[var(--text-primary)] bg-[var(--bg-surface)] border border-[var(--border-subtle)]'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                 }`}
               title="Explore Feed"
             >
               <SlidersHorizontal className="w-4 h-4" />
-              <span className="hidden lg:inline">Explore Feed</span>
+              <span>Explore Feed</span>
             </Link>
 
             {/* List an Item CTA (Desktop Only) */}
