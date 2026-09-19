@@ -1,0 +1,190 @@
+@import "tailwindcss";
+
+@theme {
+  --color-marble-white: #F8F7F4;
+  --color-ivory: #F2ECE5;
+  --color-light-grey: #D5D5D2;
+  --color-stone: #A5A5A2;
+  --color-charcoal: #2D2D2D;
+
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-card: var(--bg-card);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-muted: var(--border-muted);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent-primary);
+  --color-accent-hover: var(--accent-hover);
+
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+@layer base {
+  :root, .light {
+    --bg-primary: #F8F7F4;       /* Marble White */
+    --bg-surface: #F2ECE5;       /* Ivory */
+    --bg-card: #FFFFFF;          /* Pure White for elevation */
+    --border-subtle: #D5D5D2;    /* Light Grey */
+    --border-muted: #A5A5A2;     /* Stone */
+    --text-primary: #2D2D2D;     /* Charcoal */
+    --text-secondary: #5A5A58;   /* Muted Dark Slate */
+    --text-muted: #858582;       /* Mid Stone */
+    --accent-primary: #2D2D2D;   /* Dark Charcoal contrast */
+    --accent-hover: #454542;
+    --card-shadow: 0 4px 20px -2px rgba(45, 45, 45, 0.06), 0 2px 6px -1px rgba(45, 45, 45, 0.04);
+    --card-shadow-hover: 0 12px 30px -4px rgba(45, 45, 45, 0.12);
+    color-scheme: light;
+  }
+
+  .dark {
+    --bg-primary: #181818;       /* Deep Black/Charcoal Base */
+    --bg-surface: #2D2D2D;       /* Charcoal Surface */
+    --bg-card: #242424;          /* Slightly Lighter Card Surface */
+    --border-subtle: #3D3D3A;    /* Dark Muted Border */
+    --border-muted: #A5A5A2;     /* Stone Highlight Border */
+    --text-primary: #F8F7F4;     /* Marble White */
+    --text-secondary: #D5D5D2;   /* Light Grey */
+    --text-muted: #A5A5A2;       /* Stone */
+    --accent-primary: #F2ECE5;   /* Ivory Accent */
+    --accent-hover: #FFFFFF;
+    --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+    --card-shadow-hover: 0 12px 30px -4px rgba(0, 0, 0, 0.6);
+    color-scheme: dark;
+  }
+
+  * {
+    border-color: var(--border-subtle);
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* ==========================================================================
+   DYNAMIC THEME OVERRIDES (Targeting specific old hardcoded classes)
+   ========================================================================== */
+
+/* 1. Global Background Overrides */
+[class*="bg-\[\#09121D\]"],
+[class*="bg-\[\#071C23\]"] {
+  background-color: var(--bg-primary) !important;
+}
+
+[class*="bg-\[\#0C2B35\]"],
+[class*="bg-\[\#181F22\]"] {
+  background-color: var(--bg-surface) !important;
+}
+
+[class*="bg-\[\#103A47\]"] {
+  background-color: var(--bg-card) !important;
+}
+
+/* 2. Global Border Overrides */
+[class*="border-\[\#4A7071\]"],
+[class*="border-\[\#3D3D3A\]"] {
+  border-color: var(--border-subtle) !important;
+}
+
+[class*="border-\[\#83B2A8\]"],
+[class*="border-\[\#819FA7\]"] {
+  border-color: var(--border-muted) !important;
+}
+
+/* 3. Text Color Contrast Rules */
+.light h1, .light h2, .light h3, .light h4, .light h5, .light h6,
+.light p, .light span, .light a, .light label, .light div {
+  color: inherit;
+}
+
+[class*="text-white"],
+[class*="text-\[\#CBD6D3\]"],
+[class*="text-\[\#D5D5D2\]"] {
+  color: var(--text-primary) !important;
+}
+
+[class*="text-slate-400"],
+[class*="text-slate-300"],
+[class*="text-\[\#A5A5A2\]"] {
+  color: var(--text-secondary) !important;
+}
+
+[class*="text-\[\#83B2A8\]"],
+[class*="text-\[\#819FA7\]"] {
+  color: var(--accent-primary) !important;
+}
+
+/* 4. Interactive Buttons & Actions */
+[class*="bg-\[\#83B2A8\]"],
+button[class*="bg-\[\#83B2A8\]"],
+.btn-accent {
+  background-color: var(--accent-primary) !important;
+  color: var(--bg-primary) !important;
+  border-color: transparent !important;
+}
+
+[class*="bg-\[\#83B2A8\]"]:hover,
+button[class*="bg-\[\#83B2A8\]"]:hover,
+.btn-accent:hover {
+  background-color: var(--accent-hover) !important;
+}
+
+/* Ensure button text inside accent buttons stays readable */
+[class*="bg-\[\#83B2A8\]"] *,
+button[class*="bg-\[\#83B2A8\]"] * {
+  color: var(--bg-primary) !important;
+}
+
+/* 5. Inputs & Form Elements */
+input, select, textarea {
+  background-color: var(--bg-surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* 6. Headers & Footers */
+header {
+  background-color: var(--bg-primary) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+}
+
+footer {
+  background-color: var(--bg-surface) !important;
+  border-top: 1px solid var(--border-subtle) !important;
+}
+
+/* 7. Modals & Dialog Windows */
+.fixed.inset-0.z-50 > div {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Continuous Marquee Ticker */
+@keyframes ticker-slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker-slide 35s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
