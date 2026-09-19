@@ -293,7 +293,7 @@ export const ListItemPage: React.FC = () => {
         {/* Wizard Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#83B2A8]/10 text-[#83B2A8] text-xs font-semibold mb-2">
-            <Sparkles className="w-3.5 h-3.5" /> ISD LENDER WIZARD (BANGLADESH)
+            <Sparkles className="w-3.5 h-3.5" /> LENDER WIZARD
           </div>
           <h1 className="text-3xl font-black text-white">List Your Gear for Rent</h1>
           <p className="text-xs text-[#CBD6D3]/70 mt-1 max-w-md mx-auto">
